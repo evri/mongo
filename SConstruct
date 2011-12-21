@@ -38,7 +38,7 @@ def getThirdPartyShortNames():
         if not x.endswith( ".py" ) or x.find( "#" ) >= 0:
             continue
          
-        lst.append( x.rpartition( "." )[0] )
+        lst.append( x.split( "." )[0] )
     return lst
 
 
@@ -1480,7 +1480,7 @@ if installSetup.headers:
 if installSetup.clientSrc:
     for x in allClientFiles:
         x = str(x)
-        env.Install( installDir + "/mongo/" + x.rpartition( "/" )[0] , x )
+        env.Install( installDir + "/mongo/" + x.split( "/" )[0] , x )
 
 #lib
 if installSetup.libraries:
@@ -1559,7 +1559,7 @@ def s3push( localName , remoteName=None , remotePrefix=None , fixName=True , pla
         remoteName = localName
 
     if fixName:
-        (root,dot,suffix) = localName.rpartition( "." )
+        (root,dot,suffix) = localName.split( "." )
         name = remoteName + "-" + getSystemInstallName()
         name += remotePrefix
         if dot == "." :
